@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Newsreader } from "next/font/google";
 import "./globals.css";
+import { SmoothScroll } from "@/components/scroll/SmoothScroll";
+import { InterimHeader, InterimFooter } from "@/components/chrome/InterimChrome";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -21,7 +23,7 @@ export const metadata: Metadata = {
     template: "%s · Rathmore Retrievers",
   },
   description:
-    "A small family Golden Retriever programme — health-tested parents, puppies raised underfoot.",
+    "A small family retriever breeding programme in County Meath. Health-tested parents, puppies raised underfoot.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -30,7 +32,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${bricolage.variable} ${newsreader.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <SmoothScroll>
+          <InterimHeader />
+          <div className="flex-1">{children}</div>
+          <InterimFooter />
+        </SmoothScroll>
+      </body>
     </html>
   );
 }

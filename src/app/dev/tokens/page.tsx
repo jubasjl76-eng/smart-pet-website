@@ -48,7 +48,7 @@ export default function Tokens() {
           <p className="font-display text-6xl md:text-7xl leading-[1.05]">Raised underfoot</p>
           <p className="font-display text-3xl md:text-4xl">Section heading, Bricolage Grotesque</p>
           <p className="text-lg leading-relaxed max-w-[65ch]">
-            Body copy is Newsreader — a reading serif. It sets long trust copy
+            Body copy is Newsreader, a reading serif. It sets long trust copy
             (health guarantee, the About story) without the templated look of a
             serif <em>headline</em>. Emphasis stays in the same family.
           </p>

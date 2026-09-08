@@ -12,7 +12,7 @@
     "healthTests": [
       { "name": "Hips (BVA/KC)", "result": "3:3" },
       { "name": "Elbows", "result": "0:0" },
-      { "name": "Eyes (annual)", "result": "Clear — 2026" },
+      { "name": "Eyes (annual)", "result": "Clear (2026)" },
       { "name": "prcd-PRA", "result": "Clear (DNA)" },
       { "name": "ICT / GR-PRA1 / GR-PRA2", "result": "Clear (DNA)" }
     ],
@@ -34,7 +34,7 @@
     "healthTests": [
       { "name": "Hips (BVA/KC)", "result": "4:3" },
       { "name": "Elbows", "result": "0:0" },
-      { "name": "Eyes (annual)", "result": "Clear — 2026" },
+      { "name": "Eyes (annual)", "result": "Clear (2026)" },
       { "name": "prcd-PRA", "result": "Clear (DNA)" }
     ],
     "photos": [
@@ -55,7 +55,7 @@
     "healthTests": [
       { "name": "Hips (BVA/KC)", "result": "0:0" },
       { "name": "Elbows", "result": "0:0" },
-      { "name": "Eyes (annual)", "result": "Clear — 2026" },
+      { "name": "Eyes (annual)", "result": "Clear (2026)" },
       { "name": "prcd-PRA", "result": "Clear (DNA)" },
       { "name": "ICT / GR-PRA1 / GR-PRA2", "result": "Clear (DNA)" }
     ],
@@ -73,11 +73,11 @@
     "color": "Gold",
     "dob": "2020-07-02",
     "titles": "IKC registered",
-    "bio": "Older gentleman of the group, semi-retired. A proven producer of steady, trainable pups — several now working as assistance and therapy dogs.",
+    "bio": "Older gentleman of the group, semi-retired. A proven producer of steady, trainable pups. Several now working as assistance and therapy dogs.",
     "healthTests": [
       { "name": "Hips (BVA/KC)", "result": "5:4" },
       { "name": "Elbows", "result": "0:0" },
-      { "name": "Eyes (annual)", "result": "Clear — 2025" },
+      { "name": "Eyes (annual)", "result": "Clear (2025)" },
       { "name": "prcd-PRA", "result": "Clear (DNA)" }
     ],
     "photos": [
