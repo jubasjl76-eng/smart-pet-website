@@ -29,6 +29,10 @@
 
   --radius: 0.25rem;
 
+  /* fixed brand block — same in light and dark (used once, for the closing band) */
+  --brand-fixed: #1b3a2c;
+  --brand-fixed-ink: #eef1e9;
+
   --dur-1: 0.2s;
   --dur-2: 0.4s;
   --dur-3: 0.7s;
@@ -62,6 +66,8 @@
   --color-brand-strong: var(--brand-strong);
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
+  --color-brand-fixed: var(--brand-fixed);
+  --color-brand-fixed-ink: var(--brand-fixed-ink);
   --color-line: var(--line);
 
   --radius-sm: var(--radius);
@@ -103,4 +109,19 @@ h4,
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
 }

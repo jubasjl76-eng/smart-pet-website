@@ -1,14 +1,14 @@
 [
   {
     "id": "litter_willow_bruce_2026s",
-    "name": "Willow × Bruce — Summer 2026",
+    "name": "Willow x Bruce, Summer 2026",
     "breed": "Golden Retriever",
     "status": "available",
     "sire": { "id": "dog_bruce", "name": "Rathmore's Bruce" },
     "dam": { "id": "dog_willow", "name": "Rathmore's Willow" },
     "bornOn": "2026-07-20",
     "expectedOn": null,
-    "description": "Seven puppies — five boys, two girls — born in the kitchen and raised with Puppy Culture protocols. Ready for their families from 20 September at eight weeks, microchipped, first-vaccinated, wormed, vet-checked, and with a lifetime of breeder support.",
+    "description": "Seven puppies, five boys and two girls, born in the kitchen and raised with Puppy Culture protocols. Ready for their families from 20 September at eight weeks, microchipped, first-vaccinated, wormed, vet-checked, and with a lifetime of breeder support.",
     "photos": [
       "https://picsum.photos/seed/litter-ws-1/1200/800",
       "https://picsum.photos/seed/litter-ws-2/1200/800",
@@ -115,14 +115,14 @@
   },
   {
     "id": "litter_primrose_jasper_2026a",
-    "name": "Primrose × Jasper — Autumn 2026",
+    "name": "Primrose x Jasper, Autumn 2026",
     "breed": "Golden Retriever",
     "status": "planned",
     "sire": { "id": "dog_jasper", "name": "Kessock Jasper at Rathmore" },
     "dam": { "id": "dog_primrose", "name": "Ashfield Primrose at Rathmore" },
     "bornOn": null,
     "expectedOn": "2026-11-15",
-    "description": "A planned repeat of a cross that produced exceptional temperaments last year. Mating expected in September, puppies due mid-November, home in January. The waitlist is open now — approved families are matched to puppies at four weeks.",
+    "description": "A planned repeat of a cross that produced exceptional temperaments last year. Mating expected in September, puppies due mid-November, home in January. The waitlist is open now. Approved families are matched to puppies at four weeks.",
     "photos": [
       "https://picsum.photos/seed/litter-pj-1/1200/800",
       "https://picsum.photos/seed/litter-pj-2/1200/800"
