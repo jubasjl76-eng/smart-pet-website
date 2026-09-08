@@ -50,9 +50,17 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd(kennel)) }}
         />
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-sm focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:text-accent-ink"
+        >
+          Skip to content
+        </a>
         <SmoothScroll>
           <Header name={kennel.name} />
-          <div className="flex-1">{children}</div>
+          <div id="main" tabIndex={-1} className="flex-1 outline-none">
+            {children}
+          </div>
           <Footer kennel={kennel} />
         </SmoothScroll>
       </body>
