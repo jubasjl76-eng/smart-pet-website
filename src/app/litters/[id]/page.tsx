@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { getLitters, getLitter } from "@/lib/api";
+import { litterJsonLd } from "@/lib/site";
 import { Reveal } from "@/components/scroll/Reveal";
 import { GrowthChart } from "@/components/litter/GrowthChart";
 import type { Litter, Puppy } from "@/lib/types";
@@ -18,9 +19,15 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { id } = await params;
   const litter = await getLitter(id);
   if (!litter) return {};
+  const description = litter.description?.slice(0, 155);
   return {
     title: litter.name,
-    description: litter.description?.slice(0, 155),
+    description,
+    openGraph: {
+      title: litter.name,
+      description,
+      ...(litter.photos[0] ? { images: [litter.photos[0]] } : {}),
+    },
   };
 }
 
@@ -53,6 +60,10 @@ export default async function LitterDetail({ params }: Params) {
 
   return (
     <main className="mx-auto max-w-[1200px] px-6 py-16 md:py-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(litterJsonLd(litter)) }}
+      />
       <Reveal>
         <Link href="/litters" className="text-sm text-ink-soft underline underline-offset-4">
           Litters
