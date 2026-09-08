@@ -1,0 +1,87 @@
+[
+  {
+    "id": "dog_willow",
+    "name": "Rathmore's Willow",
+    "sex": "female",
+    "breed": "Golden Retriever",
+    "role": "dam",
+    "color": "Gold",
+    "dob": "2021-05-20",
+    "titles": "IKC registered",
+    "bio": "Our foundation girl. Biddable, soft-mouthed, and the first to greet anyone at the gate. Passed her clearances with room to spare and throws that temperament straight down the line.",
+    "healthTests": [
+      { "name": "Hips (BVA/KC)", "result": "3:3" },
+      { "name": "Elbows", "result": "0:0" },
+      { "name": "Eyes (annual)", "result": "Clear — 2026" },
+      { "name": "prcd-PRA", "result": "Clear (DNA)" },
+      { "name": "ICT / GR-PRA1 / GR-PRA2", "result": "Clear (DNA)" }
+    ],
+    "photos": [
+      "https://picsum.photos/seed/willow-1/900/600",
+      "https://picsum.photos/seed/willow-2/900/600"
+    ]
+  },
+  {
+    "id": "dog_primrose",
+    "name": "Ashfield Primrose at Rathmore",
+    "sex": "female",
+    "breed": "Golden Retriever",
+    "role": "dam",
+    "color": "Cream",
+    "dob": "2022-01-11",
+    "titles": "IKC registered · Kennel Club (UK)",
+    "bio": "Brought in from a strong English line to widen our gene pool. Bigger boned than Willow, all business in the field and completely off-switch in the house.",
+    "healthTests": [
+      { "name": "Hips (BVA/KC)", "result": "4:3" },
+      { "name": "Elbows", "result": "0:0" },
+      { "name": "Eyes (annual)", "result": "Clear — 2026" },
+      { "name": "prcd-PRA", "result": "Clear (DNA)" }
+    ],
+    "photos": [
+      "https://picsum.photos/seed/primrose-1/900/600",
+      "https://picsum.photos/seed/primrose-2/900/600"
+    ]
+  },
+  {
+    "id": "dog_bruce",
+    "name": "Rathmore's Bruce",
+    "sex": "male",
+    "breed": "Golden Retriever",
+    "role": "sire",
+    "color": "Cream",
+    "dob": "2021-03-14",
+    "titles": "IKC registered · Show Class 1",
+    "bio": "Stud dog we co-own locally. Classic blocky head, dense coat, and an enormous will to please. Health-tested annually and used sparingly.",
+    "healthTests": [
+      { "name": "Hips (BVA/KC)", "result": "0:0" },
+      { "name": "Elbows", "result": "0:0" },
+      { "name": "Eyes (annual)", "result": "Clear — 2026" },
+      { "name": "prcd-PRA", "result": "Clear (DNA)" },
+      { "name": "ICT / GR-PRA1 / GR-PRA2", "result": "Clear (DNA)" }
+    ],
+    "photos": [
+      "https://picsum.photos/seed/bruce-1/900/600",
+      "https://picsum.photos/seed/bruce-2/900/600"
+    ]
+  },
+  {
+    "id": "dog_jasper",
+    "name": "Kessock Jasper at Rathmore",
+    "sex": "male",
+    "breed": "Golden Retriever",
+    "role": "sire",
+    "color": "Gold",
+    "dob": "2020-07-02",
+    "titles": "IKC registered",
+    "bio": "Older gentleman of the group, semi-retired. A proven producer of steady, trainable pups — several now working as assistance and therapy dogs.",
+    "healthTests": [
+      { "name": "Hips (BVA/KC)", "result": "5:4" },
+      { "name": "Elbows", "result": "0:0" },
+      { "name": "Eyes (annual)", "result": "Clear — 2025" },
+      { "name": "prcd-PRA", "result": "Clear (DNA)" }
+    ],
+    "photos": [
+      "https://picsum.photos/seed/jasper-1/900/600"
+    ]
+  }
+]

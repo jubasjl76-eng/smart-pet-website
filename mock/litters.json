@@ -1,0 +1,134 @@
+[
+  {
+    "id": "litter_willow_bruce_2026s",
+    "name": "Willow × Bruce — Summer 2026",
+    "breed": "Golden Retriever",
+    "status": "available",
+    "sire": { "id": "dog_bruce", "name": "Rathmore's Bruce" },
+    "dam": { "id": "dog_willow", "name": "Rathmore's Willow" },
+    "bornOn": "2026-07-20",
+    "expectedOn": null,
+    "description": "Seven puppies — five boys, two girls — born in the kitchen and raised with Puppy Culture protocols. Ready for their families from 20 September at eight weeks, microchipped, first-vaccinated, wormed, vet-checked, and with a lifetime of breeder support.",
+    "photos": [
+      "https://picsum.photos/seed/litter-ws-1/1200/800",
+      "https://picsum.photos/seed/litter-ws-2/1200/800",
+      "https://picsum.photos/seed/litter-ws-3/1200/800"
+    ],
+    "puppyCount": 7,
+    "availableCount": 3,
+    "puppies": [
+      {
+        "id": "pup_ws_green",
+        "name": "Green collar",
+        "sex": "male",
+        "status": "available",
+        "color": "Gold",
+        "photos": ["https://picsum.photos/seed/pup-green/800/800"],
+        "weightSeries": [
+          { "date": "2026-07-20", "grams": 470 },
+          { "date": "2026-08-03", "grams": 1950 },
+          { "date": "2026-08-17", "grams": 3550 },
+          { "date": "2026-08-31", "grams": 5100 }
+        ]
+      },
+      {
+        "id": "pup_ws_blue",
+        "name": "Blue collar",
+        "sex": "male",
+        "status": "available",
+        "color": "Cream",
+        "photos": ["https://picsum.photos/seed/pup-blue/800/800"],
+        "weightSeries": [
+          { "date": "2026-07-20", "grams": 510 },
+          { "date": "2026-08-03", "grams": 2080 },
+          { "date": "2026-08-17", "grams": 3700 },
+          { "date": "2026-08-31", "grams": 5300 }
+        ]
+      },
+      {
+        "id": "pup_ws_yellow",
+        "name": "Yellow collar",
+        "sex": "female",
+        "status": "available",
+        "color": "Gold",
+        "photos": ["https://picsum.photos/seed/pup-yellow/800/800"],
+        "weightSeries": [
+          { "date": "2026-07-20", "grams": 430 },
+          { "date": "2026-08-03", "grams": 1780 },
+          { "date": "2026-08-17", "grams": 3200 },
+          { "date": "2026-08-31", "grams": 4700 }
+        ]
+      },
+      {
+        "id": "pup_ws_orange",
+        "name": "Orange collar",
+        "sex": "male",
+        "status": "reserved",
+        "color": "Gold",
+        "photos": ["https://picsum.photos/seed/pup-orange/800/800"],
+        "weightSeries": [
+          { "date": "2026-07-20", "grams": 495 },
+          { "date": "2026-08-17", "grams": 3600 },
+          { "date": "2026-08-31", "grams": 5150 }
+        ]
+      },
+      {
+        "id": "pup_ws_red",
+        "name": "Red collar",
+        "sex": "male",
+        "status": "reserved",
+        "color": "Cream",
+        "photos": ["https://picsum.photos/seed/pup-red/800/800"],
+        "weightSeries": [
+          { "date": "2026-07-20", "grams": 520 },
+          { "date": "2026-08-17", "grams": 3800 },
+          { "date": "2026-08-31", "grams": 5400 }
+        ]
+      },
+      {
+        "id": "pup_ws_purple",
+        "name": "Purple collar",
+        "sex": "female",
+        "status": "reserved",
+        "color": "Cream",
+        "photos": ["https://picsum.photos/seed/pup-purple/800/800"],
+        "weightSeries": [
+          { "date": "2026-07-20", "grams": 445 },
+          { "date": "2026-08-17", "grams": 3300 },
+          { "date": "2026-08-31", "grams": 4800 }
+        ]
+      },
+      {
+        "id": "pup_ws_black",
+        "name": "Black collar",
+        "sex": "male",
+        "status": "sold",
+        "color": "Gold",
+        "photos": ["https://picsum.photos/seed/pup-black/800/800"],
+        "weightSeries": [
+          { "date": "2026-07-20", "grams": 500 },
+          { "date": "2026-08-17", "grams": 3650 },
+          { "date": "2026-08-31", "grams": 5200 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "litter_primrose_jasper_2026a",
+    "name": "Primrose × Jasper — Autumn 2026",
+    "breed": "Golden Retriever",
+    "status": "planned",
+    "sire": { "id": "dog_jasper", "name": "Kessock Jasper at Rathmore" },
+    "dam": { "id": "dog_primrose", "name": "Ashfield Primrose at Rathmore" },
+    "bornOn": null,
+    "expectedOn": "2026-11-15",
+    "description": "A planned repeat of a cross that produced exceptional temperaments last year. Mating expected in September, puppies due mid-November, home in January. The waitlist is open now — approved families are matched to puppies at four weeks.",
+    "photos": [
+      "https://picsum.photos/seed/litter-pj-1/1200/800",
+      "https://picsum.photos/seed/litter-pj-2/1200/800"
+    ],
+    "puppyCount": 0,
+    "availableCount": 0,
+    "puppies": []
+  }
+]

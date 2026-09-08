@@ -1,0 +1,13 @@
+{
+  "name": "Rathmore Retrievers",
+  "tagline": "Health-tested retrievers, raised underfoot in a working farmhouse.",
+  "about": "Rathmore is a small family programme in County Meath. We breed one or two litters a year from fully health-tested parents, raise every puppy in the kitchen with Puppy Culture handling, and stay in touch with our families for the life of the dog. Golden Retrievers today, with a Labrador line planned.",
+  "breeds": ["Golden Retriever"],
+  "location": "County Meath, Ireland",
+  "email": "hello@rathmoreretrievers.example",
+  "phone": "+353 46 000 0000",
+  "socials": [
+    { "label": "Instagram", "url": "https://instagram.com/rathmoreretrievers.example" },
+    { "label": "Facebook", "url": "https://facebook.com/rathmoreretrievers.example" }
+  ]
+}
