@@ -34,9 +34,22 @@ PUBLIC_API_BASE_URL=http://localhost:3000 npm run dev
 
 | var | purpose |
 |---|---|
+| `NEXT_PUBLIC_SITE_URL` | canonical public origin (metadata, sitemap, robots, JSON-LD). Falls back to `http://localhost:3000`. |
 | `PUBLIC_API_BASE_URL` | backend origin for `/api/public/*`. Unset → mock mode. |
 | `PUBLIC_REVALIDATE_SECONDS` | ISR window, default `300`. |
-| `REVALIDATE_SECRET` | shared secret for `POST /api/revalidate` (dashboard pings it on publish). |
+| `REVALIDATE_SECRET` | shared secret for `POST /api/revalidate` (the backend pings it when a breeder toggles publish). |
+
+## Deploy (Vercel)
+
+1. Import the repo. Framework preset: **Next.js**. No build overrides.
+2. Set env vars (Production + Preview):
+   - `NEXT_PUBLIC_SITE_URL` = the site's URL (e.g. `https://rathmoreretrievers.example`)
+   - `PUBLIC_API_BASE_URL` = the backend's public origin
+   - `REVALIDATE_SECRET` = a random string; set the **same value** in the backend's `WEBSITE_REVALIDATE_SECRET`, and `WEBSITE_REVALIDATE_URL` there to `${NEXT_PUBLIC_SITE_URL}/api/revalidate`
+3. If breeder photos come from a host other than `picsum.photos` / `images.unsplash.com`, add it to `images.remotePatterns` in `next.config.ts`.
+4. Without `PUBLIC_API_BASE_URL` the site builds and serves the `mock/*.json` fixtures — useful for a first preview deploy before the backend is public.
+
+See [`docs/launch.md`](docs/launch.md) for the full pre-launch checklist.
 
 ## Layout
 
