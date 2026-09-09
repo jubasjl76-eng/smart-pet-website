@@ -1,12 +1,12 @@
 export const PRIMARY_NAV = [
-  { href: "/dogs", label: "Dogs" },
-  { href: "/litters", label: "Litters" },
-  { href: "/about", label: "About" },
-  { href: "/apply", label: "Apply" },
+  { href: "/dogs", key: "dogs" },
+  { href: "/litters", key: "litters" },
+  { href: "/about", key: "about" },
+  { href: "/apply", key: "apply" },
 ] as const;
 
 export const FOOTER_NAV = [
   ...PRIMARY_NAV,
-  { href: "/health", label: "Health & guarantee" },
-  { href: "/faq", label: "FAQ" },
+  { href: "/health", key: "health" },
+  { href: "/faq", key: "faq" },
 ] as const;

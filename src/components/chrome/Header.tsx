@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useTranslations, useLocale } from "next-intl";
+import { Link, usePathname } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
@@ -11,9 +11,12 @@ import { PRIMARY_NAV } from "./nav";
 export function Header({ name }: { name: string }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const locale = useLocale();
+  const t = useTranslations("Nav");
   const drawerId = useId();
   const toggleRef = useRef<HTMLButtonElement>(null);
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
+  const other = locale === "pt" ? "en" : "pt";
 
   useEffect(() => {
     if (!open) return;
@@ -35,11 +38,11 @@ export function Header({ name }: { name: string }) {
 
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-bg/85 backdrop-blur">
-      <Container className="flex h-16 items-center justify-between">
+      <Container className="flex h-16 items-center justify-between gap-4">
         <Link href="/" className="font-display text-lg font-semibold tracking-tight">
           {name}
         </Link>
-        <nav className="hidden gap-7 text-sm sm:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-7 text-sm sm:flex" aria-label={t("primary")}>
           {PRIMARY_NAV.map((n) => (
             <Link
               key={n.href}
@@ -51,9 +54,17 @@ export function Header({ name }: { name: string }) {
                   : "text-ink-soft",
               )}
             >
-              {n.label}
+              {t(n.key)}
             </Link>
           ))}
+          <Link
+            href={pathname}
+            locale={other}
+            aria-label={t("switchLocale")}
+            className="text-ink-soft transition-colors hover:text-ink"
+          >
+            {other === "en" ? t("localeEn") : t("localePt")}
+          </Link>
         </nav>
         <button
           ref={toggleRef}
@@ -63,7 +74,7 @@ export function Header({ name }: { name: string }) {
           aria-controls={drawerId}
           onClick={() => setOpen((v) => !v)}
         >
-          {open ? "Close" : "Menu"}
+          {open ? t("close") : t("menu")}
         </button>
       </Container>
 
@@ -73,7 +84,7 @@ export function Header({ name }: { name: string }) {
           className="border-t border-line bg-bg sm:hidden"
           data-lenis-prevent
         >
-          <nav className="flex flex-col gap-1 px-6 py-4" aria-label="Mobile">
+          <nav className="flex flex-col gap-1 px-6 py-4" aria-label={t("mobile")}>
             {PRIMARY_NAV.map((n, i) => (
               <Link
                 key={n.href}
@@ -82,11 +93,19 @@ export function Header({ name }: { name: string }) {
                 className="py-2 text-lg"
                 onClick={() => setOpen(false)}
               >
-                {n.label}
+                {t(n.key)}
               </Link>
             ))}
+            <Link
+              href={pathname}
+              locale={other}
+              className="py-2 text-lg text-ink-soft"
+              onClick={() => setOpen(false)}
+            >
+              {other === "en" ? t("localeEn") : t("localePt")}
+            </Link>
             <Button href="/apply" className="mt-3">
-              Join the waitlist
+              {t("waitlist")}
             </Button>
           </nav>
         </div>

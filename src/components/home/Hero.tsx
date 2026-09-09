@@ -1,9 +1,10 @@
 "use client";
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { usePrefersReducedMotion } from "@/lib/useReducedMotion";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -16,6 +17,7 @@ gsap.registerPlugin(ScrollTrigger);
 export function Hero({ headline, sub }: { headline: string; sub: string }) {
   const root = useRef<HTMLDivElement>(null);
   const reduced = usePrefersReducedMotion();
+  const t = useTranslations("Home");
 
   useEffect(() => {
     if (reduced || !root.current) return;
@@ -42,7 +44,7 @@ export function Hero({ headline, sub }: { headline: string; sub: string }) {
       <div className="hero-media absolute inset-0">
         <Image
           src="/home/hero.jpg"
-          alt="A golden retriever crossing a misty field at first light"
+          alt={t("heroAlt")}
           fill
           priority
           sizes="100vw"
@@ -61,13 +63,13 @@ export function Hero({ headline, sub }: { headline: string; sub: string }) {
             href="/litters"
             className="rounded-sm bg-accent px-6 py-3 text-sm text-accent-ink transition-transform active:translate-y-px"
           >
-            See available puppies
+            {t("seePuppies")}
           </Link>
           <Link
             href="/dogs"
             className="rounded-sm border border-white/45 px-6 py-3 text-sm text-white transition-colors hover:bg-white/10"
           >
-            Meet the dogs
+            {t("meetDogs")}
           </Link>
         </div>
       </div>

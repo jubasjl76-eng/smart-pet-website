@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
 
 const variants = {
@@ -69,8 +69,15 @@ export function Button({
         </span>
       );
     }
+    if (/^(mailto:|https?:|tel:)/.test(href)) {
+      return (
+        <a href={href} className={cls}>
+          {children}
+        </a>
+      );
+    }
     return (
-      <Link href={href} className={cls} {...linkRest}>
+      <Link href={href} className={cls}>
         {children}
       </Link>
     );

@@ -1,9 +1,11 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import type { Kennel } from "@/lib/types";
 import { Container } from "@/components/ui/Container";
 import { FOOTER_NAV } from "./nav";
 
-export function Footer({ kennel }: { kennel: Kennel }) {
+export async function Footer({ kennel }: { kennel: Kennel }) {
+  const t = await getTranslations("Nav");
   return (
     <footer className="border-t border-line">
       <Container className="grid gap-8 py-12 sm:grid-cols-2 lg:grid-cols-3">
@@ -12,10 +14,10 @@ export function Footer({ kennel }: { kennel: Kennel }) {
           <p className="mt-2 text-sm text-ink-soft">{kennel.tagline}</p>
           <p className="mt-4 text-sm text-ink-soft">{kennel.location}</p>
         </div>
-        <nav aria-label="Footer" className="flex flex-col gap-2 text-sm">
+        <nav aria-label={t("footer")} className="flex flex-col gap-2 text-sm">
           {FOOTER_NAV.map((n) => (
             <Link key={n.href} href={n.href} className="text-ink-soft hover:text-ink">
-              {n.label}
+              {t(n.key)}
             </Link>
           ))}
         </nav>

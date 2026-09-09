@@ -1,17 +1,19 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
 
 export type Crumb = { href?: string; label: string };
 
-export function Breadcrumb({
+export async function Breadcrumb({
   items,
   className,
 }: {
   items: Crumb[];
   className?: string;
 }) {
+  const t = await getTranslations("Nav");
   return (
-    <nav aria-label="Breadcrumb" className={cn("text-sm text-ink-soft", className)}>
+    <nav aria-label={t("breadcrumb")} className={cn("text-sm text-ink-soft", className)}>
       <ol className="flex flex-wrap items-center gap-2">
         {items.map((item, i) => {
           const last = i === items.length - 1;

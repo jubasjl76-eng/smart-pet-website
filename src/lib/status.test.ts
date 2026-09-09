@@ -7,15 +7,15 @@ import {
 
 describe("status maps", () => {
   it("labels every litter status", () => {
-    expect(litterStatusLabel("available")).toBe("Puppies available");
-    expect(litterStatusLabel("sold_out")).toBe("Placed");
-    expect(litterStatusLabel("planned")).toBe("Planned");
+    expect(litterStatusLabel("available", "en")).toBe("Puppies available");
+    expect(litterStatusLabel("sold_out", "en")).toBe("Placed");
+    expect(litterStatusLabel("planned", "pt")).toBe("Planeada");
   });
 
   it("labels every puppy status", () => {
-    expect(puppyStatusLabel("available")).toBe("Available");
-    expect(puppyStatusLabel("reserved")).toBe("Reserved");
-    expect(puppyStatusLabel("sold")).toBe("In its new home");
+    expect(puppyStatusLabel("available", "en")).toBe("Available");
+    expect(puppyStatusLabel("reserved", "pt")).toBe("Reservado");
+    expect(puppyStatusLabel("sold", "en")).toBe("In its new home");
   });
 
   it("uses accent only for available puppies", () => {
