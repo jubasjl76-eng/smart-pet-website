@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import Link from "next/link";
+import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { getLitters, getLitter } from "@/lib/api";
-import { litterJsonLd } from "@/lib/site";
+import { litterJsonLd, languageAlternates, localeUrl } from "@/lib/site";
 import { Reveal } from "@/components/scroll/Reveal";
 import { GrowthChart } from "@/components/litter/GrowthChart";
-import type { Litter, Puppy } from "@/lib/types";
+import { formatLongDate, formatMonthYear } from "@/lib/format";
+import { puppyStatusLabel } from "@/lib/status";
+import type { Locale } from "@/i18n/routing";
+import type { Litter } from "@/lib/types";
 
-type Params = { params: Promise<{ id: string }> };
+type Params = { params: Promise<{ locale: string; id: string }> };
 
 export async function generateStaticParams() {
   const litters = await getLitters();
@@ -16,13 +20,15 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
-  const { id } = await params;
+  const { locale, id } = await params;
   const litter = await getLitter(id);
   if (!litter) return {};
   const description = litter.description?.slice(0, 155);
+  const path = `/litters/${litter.id}`;
   return {
     title: litter.name,
     description,
+    alternates: { canonical: localeUrl(path, locale), languages: languageAlternates(path) },
     openGraph: {
       title: litter.name,
       description,
@@ -31,42 +37,45 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   };
 }
 
-const PUPPY_STATUS: Record<Puppy["status"], { label: string; cls: string }> = {
-  available: { label: "Available", cls: "bg-accent/15 text-accent" },
-  reserved: { label: "Reserved", cls: "bg-surface-2 text-ink-soft" },
-  sold: { label: "In its new home", cls: "bg-surface-2 text-ink-soft" },
-};
-
-function timing(l: Litter): string {
-  const long = (iso: string) =>
-    new Date(iso).toLocaleDateString("en-IE", { day: "numeric", month: "long", year: "numeric" });
-  const monthYear = (iso: string) =>
-    new Date(iso).toLocaleDateString("en-IE", { month: "long", year: "numeric" });
+function timing(
+  l: Litter,
+  locale: Locale,
+  t: Awaited<ReturnType<typeof getTranslations>>,
+) {
   if (l.bornOn) {
+    const date = formatLongDate(l.bornOn, locale);
     return l.availableCount > 0
-      ? `Born ${long(l.bornOn)} · ${l.availableCount} of ${l.puppyCount} still available`
-      : `Born ${long(l.bornOn)} · every puppy is placed`;
+      ? t("bornAvailable", { date, available: l.availableCount, total: l.puppyCount })
+      : t("bornPlaced", { date });
   }
-  if (l.expectedOn) return `Expected ${monthYear(l.expectedOn)} · waitlist open`;
-  return "Waitlist open";
+  if (l.expectedOn) return t("expectedWaitlist", { date: formatMonthYear(l.expectedOn, locale) });
+  return t("waitlistOpen");
 }
 
 export default async function LitterDetail({ params }: Params) {
-  const { id } = await params;
-  const litter = await getLitter(id);
+  const { locale: localeParam, id } = await params;
+  setRequestLocale(localeParam);
+  const [litter, t, nav, littersT, locale] = await Promise.all([
+    getLitter(id),
+    getTranslations("Litter"),
+    getTranslations("Nav"),
+    getTranslations("Litters"),
+    getLocale(),
+  ]);
   if (!litter) notFound();
 
+  const loc = locale as Locale;
   const hasPuppies = litter.puppies.length > 0;
 
   return (
     <main className="mx-auto max-w-[1200px] px-6 py-16 md:py-24">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(litterJsonLd(litter)) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(litterJsonLd(litter, loc)) }}
       />
       <Reveal>
         <Link href="/litters" className="text-sm text-ink-soft underline underline-offset-4">
-          Litters
+          {nav("litters")}
         </Link>
         <h1 className="mt-4 font-display text-4xl md:text-5xl">{litter.name}</h1>
         <p className="mt-3 text-lg text-ink-soft">
@@ -77,7 +86,7 @@ export default async function LitterDetail({ params }: Params) {
           ) : (
             litter.dam?.name
           )}{" "}
-          and{" "}
+          {littersT("and")}{" "}
           {litter.sire?.id ? (
             <Link href="/dogs" className="underline underline-offset-4">
               {litter.sire.name}
@@ -86,7 +95,7 @@ export default async function LitterDetail({ params }: Params) {
             litter.sire?.name
           )}
         </p>
-        <p className="mt-1 text-ink-soft">{timing(litter)}</p>
+        <p className="mt-1 text-ink-soft">{timing(litter, loc, t)}</p>
         {litter.description && (
           <p className="mt-6 max-w-[62ch] text-lg leading-relaxed">{litter.description}</p>
         )}
@@ -111,12 +120,12 @@ export default async function LitterDetail({ params }: Params) {
       {hasPuppies ? (
         <>
           <Reveal className="mt-20">
-            <h2 className="font-display text-2xl md:text-3xl">The puppies</h2>
+            <h2 className="font-display text-2xl md:text-3xl">{t("puppies")}</h2>
           </Reveal>
 
           <div className="mt-8 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {litter.puppies.map((p, i) => {
-              const s = PUPPY_STATUS[p.status];
+              const tone = p.status === "available" ? "bg-accent/15 text-accent" : "bg-surface-2 text-ink-soft";
               return (
                 <Reveal key={p.id} delay={(i % 3) * 0.06}>
                   <article>
@@ -131,10 +140,12 @@ export default async function LitterDetail({ params }: Params) {
                     </div>
                     <div className="mt-3 flex items-baseline justify-between gap-3">
                       <h3 className="font-display text-lg">{p.name}</h3>
-                      <span className={`rounded-sm px-2 py-0.5 text-xs ${s.cls}`}>{s.label}</span>
+                      <span className={`rounded-sm px-2 py-0.5 text-xs ${tone}`}>
+                        {puppyStatusLabel(p.status, loc)}
+                      </span>
                     </div>
                     <p className="mt-1 text-sm text-ink-soft">
-                      {p.sex === "male" ? "Male" : "Female"}
+                      {p.sex === "male" ? t("male") : t("female")}
                       {p.color ? ` · ${p.color}` : ""}
                     </p>
                     {p.status === "available" && (
@@ -142,7 +153,7 @@ export default async function LitterDetail({ params }: Params) {
                         href={`/apply?puppy=${p.id}&litter=${litter.id}`}
                         className="mt-3 inline-block rounded-sm bg-accent px-4 py-2 text-sm text-accent-ink transition-transform active:translate-y-px"
                       >
-                        Reserve {p.name.toLowerCase()}
+                        {t("reserve", { name: p.name })}
                       </Link>
                     )}
                   </article>
@@ -157,16 +168,13 @@ export default async function LitterDetail({ params }: Params) {
         </>
       ) : (
         <Reveal className="mt-16 border-t border-line pt-10">
-          <h2 className="font-display text-2xl">The puppies are not here yet</h2>
-          <p className="mt-3 max-w-[55ch] text-lg leading-relaxed text-ink-soft">
-            We match approved families to puppies at four weeks, in waitlist order.
-            Join now to be considered for this litter.
-          </p>
+          <h2 className="font-display text-2xl">{t("notYetTitle")}</h2>
+          <p className="mt-3 max-w-[55ch] text-lg leading-relaxed text-ink-soft">{t("notYetBody")}</p>
           <Link
             href={`/apply?litter=${litter.id}`}
             className="mt-6 inline-block rounded-sm bg-accent px-6 py-3 text-sm text-accent-ink transition-transform active:translate-y-px"
           >
-            Join the waitlist
+            {nav("waitlist")}
           </Link>
         </Reveal>
       )}

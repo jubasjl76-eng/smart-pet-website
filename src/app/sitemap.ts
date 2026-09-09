@@ -1,21 +1,33 @@
 import type { MetadataRoute } from "next";
 import { getLitters } from "@/lib/api";
-import { SITE_URL } from "@/lib/site";
+import { languageAlternates, localeUrl } from "@/lib/site";
+import { routing } from "@/i18n/routing";
+
+const STATIC_PATHS = ["/", "/dogs", "/litters", "/about", "/health", "/faq", "/apply"];
+
+function entriesFor(path: string, extra: Pick<MetadataRoute.Sitemap[number], "changeFrequency" | "priority">) {
+  return routing.locales.map((locale) => ({
+    url: localeUrl(path, locale),
+    alternates: { languages: languageAlternates(path) },
+    ...extra,
+  }));
+}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const litters = await getLitters();
-  const staticPaths = ["", "/dogs", "/litters", "/about", "/health-guarantee", "/faq", "/apply"];
 
   return [
-    ...staticPaths.map((p) => ({
-      url: `${SITE_URL}${p}`,
-      changeFrequency: "weekly" as const,
-      priority: p === "" ? 1 : 0.7,
-    })),
-    ...litters.map((l) => ({
-      url: `${SITE_URL}/litters/${l.id}`,
-      changeFrequency: "daily" as const,
-      priority: 0.8,
-    })),
+    ...STATIC_PATHS.flatMap((p) =>
+      entriesFor(p, {
+        changeFrequency: "weekly",
+        priority: p === "/" ? 1 : 0.7,
+      }),
+    ),
+    ...litters.flatMap((l) =>
+      entriesFor(`/litters/${l.id}`, {
+        changeFrequency: "daily",
+        priority: 0.8,
+      }),
+    ),
   ];
 }

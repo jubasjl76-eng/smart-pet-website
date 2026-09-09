@@ -1,31 +1,45 @@
 import Image from "next/image";
-import Link from "next/link";
+import { getLocale, getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import type { Litter } from "@/lib/types";
+import type { Locale } from "@/i18n/routing";
 import { Reveal } from "@/components/scroll/Reveal";
+import { formatLongDate } from "@/lib/format";
 
-function statusLine(l: Litter): string {
-  const d = (iso: string) =>
-    new Date(iso).toLocaleDateString("en-IE", { day: "numeric", month: "long", year: "numeric" });
-  if (l.bornOn) {
-    return l.availableCount > 0
-      ? `Born ${d(l.bornOn)} · ${l.availableCount} of ${l.puppyCount} still available`
-      : `Born ${d(l.bornOn)} · all reserved`;
-  }
-  if (l.expectedOn) return `Expected ${d(l.expectedOn)} · waitlist open`;
-  return "Planned · waitlist open";
-}
-
-export function CurrentLitter({ litter }: { litter: Litter }) {
+export async function CurrentLitter({ litter }: { litter: Litter }) {
+  const [t, locale] = await Promise.all([
+    getTranslations("Home"),
+    getLocale(),
+  ]);
+  const loc = locale as Locale;
   const canReserve = litter.availableCount > 0;
   const pups = litter.puppies.slice(0, 4);
+
+  let statusLine: string;
+  if (litter.bornOn) {
+    const d = formatLongDate(litter.bornOn, loc);
+    statusLine = canReserve
+      ? loc === "pt"
+        ? `Nascidos ${d} · ${litter.availableCount} de ${litter.puppyCount} ainda disponíveis`
+        : `Born ${d} · ${litter.availableCount} of ${litter.puppyCount} still available`
+      : loc === "pt"
+        ? `Nascidos ${d} · todos reservados`
+        : `Born ${d} · all reserved`;
+  } else if (litter.expectedOn) {
+    const d = formatLongDate(litter.expectedOn, loc);
+    statusLine =
+      loc === "pt" ? `Previstos ${d} · lista de espera aberta` : `Expected ${d} · waitlist open`;
+  } else {
+    statusLine = loc === "pt" ? "Planeada · lista de espera aberta" : "Planned · waitlist open";
+  }
 
   return (
     <section className="mx-auto max-w-[1200px] px-6 py-28">
       <div className="grid gap-10 md:grid-cols-2 md:items-center">
         <Reveal>
-          <p className="text-sm uppercase tracking-[0.16em] text-accent">Current litter</p>
+          <p className="text-sm uppercase tracking-[0.16em] text-accent">{t("currentLitter")}</p>
           <h2 className="mt-3 font-display text-3xl md:text-4xl">{litter.name}</h2>
-          <p className="mt-3 text-ink-soft">{statusLine(litter)}</p>
+          <p className="mt-3 text-ink-soft">{statusLine}</p>
           {litter.description && (
             <p className="mt-5 text-lg leading-relaxed">{litter.description}</p>
           )}
@@ -35,14 +49,14 @@ export function CurrentLitter({ litter }: { litter: Litter }) {
                 href={`/litters/${litter.id}`}
                 className="rounded-sm bg-accent px-6 py-3 text-sm text-accent-ink transition-transform active:translate-y-px"
               >
-                Reserve a puppy
+                {t("reservePuppy")}
               </Link>
             )}
             <Link
               href="/apply"
               className="rounded-sm border border-ink/30 px-6 py-3 text-sm transition-colors hover:bg-surface"
             >
-              Join the waitlist
+              {t("waitlist")}
             </Link>
           </div>
         </Reveal>

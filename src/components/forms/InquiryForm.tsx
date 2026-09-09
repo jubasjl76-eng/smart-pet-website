@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { Field, Honeypot, TextAreaField } from "@/components/ui/Field";
 import { parseInquiry } from "@/lib/inquiry";
@@ -14,6 +15,7 @@ export function InquiryForm({
   litterId?: string;
   context?: string;
 }) {
+  const t = useTranslations("Apply");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">(
     "idle",
@@ -28,7 +30,10 @@ export function InquiryForm({
     const raw = Object.fromEntries(fd.entries());
     const parsed = parseInquiry({ ...raw, puppyId, litterId });
     if (!parsed.ok) {
-      setErrors(parsed.errors);
+      const next: Record<string, string> = {};
+      if (parsed.errors.name) next.name = t("nameError");
+      if (parsed.errors.email) next.email = t("emailError");
+      setErrors(next);
       setStatus("idle");
       return;
     }
@@ -49,11 +54,8 @@ export function InquiryForm({
   if (status === "success") {
     return (
       <div className="border-t border-line pt-6" role="status">
-        <h2 className="font-display text-2xl">We have your note</h2>
-        <p className="mt-3 text-lg leading-relaxed text-ink-soft">
-          Thank you. We read every application ourselves and will write back
-          within a few days. No deposit is taken online.
-        </p>
+        <h2 className="font-display text-2xl">{t("successTitle")}</h2>
+        <p className="mt-3 text-lg leading-relaxed text-ink-soft">{t("successBody")}</p>
       </div>
     );
   }
@@ -63,14 +65,14 @@ export function InquiryForm({
       {context && <p className="text-ink-soft">{context}</p>}
       <Honeypot />
       <Field
-        label="Your name"
+        label={t("name")}
         name="name"
         autoComplete="name"
         required
         error={errors.name}
       />
       <Field
-        label="Email"
+        label={t("email")}
         name="email"
         type="email"
         autoComplete="email"
@@ -78,28 +80,29 @@ export function InquiryForm({
         error={errors.email}
       />
       <Field
-        label="Phone"
+        label={t("phone")}
         name="phone"
         type="tel"
         autoComplete="tel"
         optional
+        optionalLabel={t("optional")}
         error={errors.phone}
       />
       <TextAreaField
-        label="About your home"
+        label={t("message")}
         name="message"
         optional
+        optionalLabel={t("optional")}
         error={errors.message}
-        placeholder="Who lives with you, other animals, the sort of life you have in mind."
+        placeholder={t("messagePlaceholder")}
       />
       {status === "error" && (
         <p className="text-sm text-accent" role="alert">
-          We could not send that just now. Please try again, or email us
-          directly.
+          {t("error")}
         </p>
       )}
       <Button type="submit" disabled={status === "submitting"}>
-        {status === "submitting" ? "Sending…" : "Send application"}
+        {status === "submitting" ? t("sending") : t("submit")}
       </Button>
     </form>
   );

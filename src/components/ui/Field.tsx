@@ -8,6 +8,7 @@ type FieldProps = {
   name: string;
   error?: string;
   optional?: boolean;
+  optionalLabel?: string;
   className?: string;
 };
 
@@ -16,6 +17,7 @@ export function Field({
   name,
   error,
   optional,
+  optionalLabel = "optional",
   className,
   id: idProp,
   ...input
@@ -26,7 +28,7 @@ export function Field({
     <div className={cn("space-y-1.5", className)}>
       <label htmlFor={id} className="block text-sm text-ink">
         {label}
-        {optional && <span className="text-ink-soft"> (optional)</span>}
+        {optional && <span className="text-ink-soft"> ({optionalLabel})</span>}
       </label>
       <input
         id={id}
@@ -50,6 +52,7 @@ export function TextAreaField({
   name,
   error,
   optional,
+  optionalLabel = "optional",
   className,
   id: idProp,
   ...input
@@ -60,7 +63,7 @@ export function TextAreaField({
     <div className={cn("space-y-1.5", className)}>
       <label htmlFor={id} className="block text-sm text-ink">
         {label}
-        {optional && <span className="text-ink-soft"> (optional)</span>}
+        {optional && <span className="text-ink-soft"> ({optionalLabel})</span>}
       </label>
       <textarea
         id={id}
