@@ -55,6 +55,7 @@ export default async function LittersPage({ params }: Props) {
                     src={l.photos[0] ?? FALLBACK}
                     alt=""
                     fill
+                    priority={i === 0}
                     sizes="(min-width: 768px) 620px, 90vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                   />

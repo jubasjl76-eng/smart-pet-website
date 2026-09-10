@@ -30,13 +30,15 @@ export async function Parents({ dogs }: { dogs: Dog[] }) {
         {dogs.map((d) => (
           <article key={d.id} className="w-[78vw] shrink-0 sm:w-[400px]">
             <div className="relative aspect-[4/5] overflow-hidden bg-surface">
-              <Image
-                src={d.photos[0]}
-                alt={d.name}
-                fill
-                sizes="400px"
-                className="object-cover"
-              />
+              {d.photos[0] ? (
+                <Image
+                  src={d.photos[0]}
+                  alt={d.name}
+                  fill
+                  sizes="400px"
+                  className="object-cover"
+                />
+              ) : null}
             </div>
             <div className="mt-3 flex items-baseline justify-between gap-3">
               <h3 className="font-display text-xl">{d.name}</h3>

@@ -2,7 +2,6 @@ import { Bricolage_Grotesque, Newsreader } from "next/font/google";
 import "./globals.css";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
-import { Button } from "@/components/ui/Button";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -17,7 +16,10 @@ const newsreader = Newsreader({
   style: ["normal", "italic"],
 });
 
-/** Fallback when the request is outside `[locale]`. Portuguese is the default. */
+const btn =
+  "inline-flex items-center justify-center rounded-sm px-5 py-2.5 text-sm transition-[color,background-color,transform] duration-200 ease-[var(--ease-out)] active:translate-y-px focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
+
+/** Outside NextIntlClientProvider — plain anchors only, not `Button` / next-intl `Link`. */
 export default function NotFound() {
   return (
     <html lang="pt" className={`${bricolage.variable} ${newsreader.variable} h-full antialiased`}>
@@ -32,10 +34,15 @@ export default function NotFound() {
                 ninhada actual continuam no site.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Button href="/litters">Ver as ninhadas</Button>
-                <Button href="/" variant="ghost">
+                <a href="/litters" className={`${btn} bg-accent text-accent-ink hover:bg-accent/90`}>
+                  Ver as ninhadas
+                </a>
+                <a
+                  href="/"
+                  className={`${btn} border border-ink/30 bg-transparent hover:bg-surface`}
+                >
                   Início
-                </Button>
+                </a>
               </div>
             </div>
           </Container>

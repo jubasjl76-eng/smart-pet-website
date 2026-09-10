@@ -130,13 +130,15 @@ export default async function LitterDetail({ params }: Params) {
                 <Reveal key={p.id} delay={(i % 3) * 0.06}>
                   <article>
                     <div className="relative aspect-square overflow-hidden bg-surface">
-                      <Image
-                        src={p.photos[0]}
-                        alt={p.name}
-                        fill
-                        sizes="(min-width: 1024px) 360px, (min-width: 640px) 45vw, 90vw"
-                        className="object-cover"
-                      />
+                      {p.photos[0] ? (
+                        <Image
+                          src={p.photos[0]}
+                          alt={p.name}
+                          fill
+                          sizes="(min-width: 1024px) 360px, (min-width: 640px) 45vw, 90vw"
+                          className="object-cover"
+                        />
+                      ) : null}
                     </div>
                     <div className="mt-3 flex items-baseline justify-between gap-3">
                       <h3 className="font-display text-lg">{p.name}</h3>

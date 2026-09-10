@@ -66,13 +66,15 @@ export async function CurrentLitter({ litter }: { litter: Litter }) {
             <div className="grid grid-cols-2 gap-3">
               {pups.map((p) => (
                 <div key={p.id} className="relative aspect-square overflow-hidden bg-surface">
-                  <Image
-                    src={p.photos[0]}
-                    alt={p.name}
-                    fill
-                    sizes="(min-width: 768px) 280px, 45vw"
-                    className="object-cover"
-                  />
+                  {p.photos[0] ? (
+                    <Image
+                      src={p.photos[0]}
+                      alt={p.name}
+                      fill
+                      sizes="(min-width: 768px) 280px, 45vw"
+                      className="object-cover"
+                    />
+                  ) : null}
                 </div>
               ))}
             </div>

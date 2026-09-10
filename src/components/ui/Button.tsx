@@ -1,6 +1,8 @@
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
 
+/** Needs `NextIntlClientProvider`. Do not use with `href` in root `error.tsx` / `not-found.tsx`. */
+
 const variants = {
   accent:
     "bg-accent text-accent-ink hover:bg-accent/90",
