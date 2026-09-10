@@ -1,0 +1,15 @@
+/**
+ * Sentry — Edge runtime (middleware, edge routes) (hardening Phase 15).
+ * Loaded from src/instrumentation.ts `register()`. No DSN → no-op.
+ */
+import * as Sentry from '@sentry/nextjs';
+
+const dsn = (process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN)?.trim() || undefined;
+
+Sentry.init({
+  dsn,
+  environment: process.env.SENTRY_ENVIRONMENT || process.env.VERCEL_ENV || process.env.NODE_ENV,
+  release: process.env.SENTRY_RELEASE || process.env.VERCEL_GIT_COMMIT_SHA,
+  tracesSampleRate: Number(process.env.SENTRY_TRACES_SAMPLE_RATE) || 0,
+  sendDefaultPii: false,
+});
